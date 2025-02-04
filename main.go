@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
-	server.Run()
-	client.Run()
+	go server.Run()
+	go client.Run()
+
+	select {}
 }
