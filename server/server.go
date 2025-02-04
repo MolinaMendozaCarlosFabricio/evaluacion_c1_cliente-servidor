@@ -1,6 +1,8 @@
 package server
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -25,12 +27,33 @@ func get(c *gin.Context) {
 }
 
 func comprobate(c *gin.Context) {
+	fmt.Println("Comprobando cambios: ", changes)
 	c.JSON(http.StatusOK, gin.H{
 		"Changes": changes,
 	})
 }
 
-func send_changes(c *gin.Context) {}
+func send_changes(c *gin.Context) {
+	fmt.Println("Enviando cambios")
+
+	c.Header("Content-Type", "application/json")
+	c.Header("Transfer-Encoding", "chunked")
+
+	i := 0
+	for i < len(product_list) {
+		product := product_list[i]
+
+		writer := c.Writer
+
+		fmt.Println("Product: ", product)
+		payload := map[string]Product{"Product": product}
+
+		jsonData, _ := json.Marshal(payload)
+
+		writer.Write(jsonData)
+		writer.Flush()
+	}
+}
 
 func post(c *gin.Context) {
 	var input struct {

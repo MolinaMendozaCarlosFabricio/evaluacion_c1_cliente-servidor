@@ -1,4 +1,4 @@
-package server
+package client
 
 import (
 	"fmt"
@@ -10,15 +10,10 @@ import (
 
 func Run() {
 	r := gin.Default()
-	r.GET("/get", get)
-	r.GET("/comprobate", comprobate)
-	r.GET("/send_changes", send_changes)
-	r.POST("/create", post)
-	r.PUT("/edit/:id", put)
-	r.DELETE("/delete/:id", delete)
+	r.GET("/execute", replicate_changes)
 
 	srv := &http.Server{
-		Addr:         ":3000",
+		Addr:         ":4000",
 		Handler:      r,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 5 * time.Minute,
