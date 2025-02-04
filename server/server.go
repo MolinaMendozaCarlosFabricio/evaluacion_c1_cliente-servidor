@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -25,12 +26,15 @@ func get(c *gin.Context) {
 }
 
 func comprobate(c *gin.Context) {
+	fmt.Println("Comprobando cambios: ", changes)
 	c.JSON(http.StatusOK, gin.H{
 		"Changes": changes,
 	})
 }
 
-func send_changes(c *gin.Context) {}
+func send_changes(c *gin.Context) {
+	fmt.Println("Enviando cambios")
+}
 
 func post(c *gin.Context) {
 	var input struct {
