@@ -59,7 +59,14 @@ func replicate_changes(c *gin.Context) {
 			fmt.Println("Cambios: ", result.Changes)
 
 			if result.Changes {
-				res, err := http.Get("http://localhost:3000/send_changes")
+				/*
+				for {
+					res, err := http.Get("http://localhost:3000/send_changes")
+
+
+				}
+					*/
+
 			}
 		}else {
 			fmt.Printf("Respuesta inesperada del servidor: %d\n", response.StatusCode)
